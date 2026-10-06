@@ -1,0 +1,176 @@
+# Host log collector for obs-sample-estate (installed at /opt/obs-host-collector
+# on the lab image; not part of the estate's compose project, so
+# `docker compose down` in the estate does not stop it, and not lab 03's
+# sidecar).
+#
+# It reads the Docker json-file logs of the estate's four containers
+# (storefront, checkout-api, inventory, dispatch-worker), turns each line into
+# an OpenTelemetry log record and sends it to SigNoz over OTLP/HTTP on 4318.
+#
+#   - A line whose body is a JSON object (checkout-api from stage 02,
+#     dispatch-worker, storefront) is parsed into log attributes, so every key
+#     the service wrote (event, level, service_name, correlation_id,
+#     missing_skus, ...) is filterable by name. Severity comes from `level`,
+#     and `trace_id` / `span_id` (written by the pino instrumentation from
+#     lab 03 on) become the record's trace context.
+#   - An inventory line (Spring Boot console pattern) is parsed into the same
+#     attribute names: service_name, level, correlation_id (from `cid=`),
+#     event and the other key=value pairs; the trace and span ids printed
+#     after lab 03 task 3b become the record's trace context.
+#   - Any other line (checkout-api's module 01 print lines) is sent as it is,
+#     body only.
+#
+# The record time is the time Docker read the line, to the nanosecond. The
+# services' own `time` field (kept as an attribute) is to the millisecond,
+# and records written in the same millisecond would otherwise lose their
+# order: a request's last record, `http.request`, must sort last.
+#
+# Each record also carries `container_name`, the compose service name, so an
+# unparsed line can still be found per container. No record gets the
+# resource attribute `service.name`.
+extensions:
+  # Remembers how far each file has been read, so a collector restart
+  # neither repeats nor skips lines.
+  file_storage/file_log:
+    directory: /var/lib/otelcol
+    create_directory: true
+
+receivers:
+  file_log/estate:
+    include: [/var/lib/docker/containers/*/*-json.log]
+    # Files present when the collector first starts are read from their end;
+    # files created later (a recreated container) are read from the start.
+    start_at: end
+    poll_interval: 500ms
+    storage: file_storage/file_log
+    operators:
+      # Docker json-file line: {"log":"...\n","stream":"stdout","time":"...",
+      # "attrs":{"com.docker.compose.project":...,"com.docker.compose.service":...}}
+      - id: docker
+        type: json_parser
+        timestamp:
+          parse_from: attributes.time
+          layout_type: gotime
+          layout: '2006-01-02T15:04:05.999999999Z07:00'
+      - id: keep_estate
+        type: filter
+        expr: 'attributes.attrs == nil or attributes.attrs["com.docker.compose.project"] != "obs-sample-estate" or not (attributes.attrs["com.docker.compose.service"] in ["storefront", "checkout-api", "inventory", "dispatch-worker"])'
+      - id: container_name
+        type: move
+        from: attributes.attrs["com.docker.compose.service"]
+        to: attributes.container_name
+      - id: stream
+        type: move
+        from: attributes.stream
+        to: attributes["log.iostream"]
+      - id: body
+        type: move
+        from: attributes.log
+        to: body
+      - id: drop_docker_fields
+        type: remove
+        field: attributes.attrs
+      - id: drop_docker_time
+        type: remove
+        field: attributes.time
+      - id: trim_newline
+        type: regex_replace
+        regex: '[\r\n]+$'
+        replace_with: ''
+        field: body
+      - id: route
+        type: router
+        routes:
+          - output: parse_json
+            expr: 'body matches "^\\s*\\{"'
+          - output: parse_inventory
+            expr: 'attributes.container_name == "inventory"'
+        default: done
+
+      # JSON records (pino shape).
+      - id: parse_json
+        type: json_parser
+        parse_from: body
+        parse_to: attributes
+        on_error: send_quiet
+        severity:
+          parse_from: attributes.level
+        trace:
+          trace_id:
+            parse_from: attributes.trace_id
+          span_id:
+            parse_from: attributes.span_id
+          trace_flags:
+            parse_from: attributes.trace_flags
+        output: done
+
+      # inventory: 2026-09-15T09:44:00.020Z  INFO [inventory,<32 hex>,<16 hex>] 1 --- [nio-3001-exec-1] cid=<id> ReserveController : event=... k=v msg="..."
+      # The bracketed trace part appears only after lab 03 task 3b.
+      - id: parse_inventory
+        type: regex_parser
+        parse_from: body
+        parse_to: attributes
+        on_error: send_quiet
+        regex: '^(?P<time>\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z)\s+(?P<level>[A-Z]+)(?:\s+\[inventory,(?P<trace_id>[0-9a-f]*),(?P<span_id>[0-9a-f]*)\])?\s+\S+\s+---\s+\[\s*(?P<thread>[^\]]*)\]\s+cid=(?P<correlation_id>\S+)\s+(?P<logger>\S+)\s+:\s+(?P<message>.*)$'
+        severity:
+          parse_from: attributes.level
+        output: inventory_trace
+      - id: inventory_trace
+        type: trace_parser
+        if: 'attributes.trace_id != nil and attributes.trace_id != ""'
+        trace_id:
+          parse_from: attributes.trace_id
+        span_id:
+          parse_from: attributes.span_id
+      - id: inventory_level_name
+        type: add
+        if: 'attributes.level != nil'
+        field: attributes.level
+        value: EXPR(lower(attributes.level))
+      - id: inventory_service
+        type: add
+        if: 'attributes.message != nil'
+        field: attributes.service_name
+        value: inventory
+      - id: inventory_no_cid
+        type: remove
+        if: 'attributes.correlation_id == "-"'
+        field: attributes.correlation_id
+      - id: inventory_no_trace
+        type: remove
+        if: 'attributes.trace_id == ""'
+        field: attributes.trace_id
+      - id: inventory_no_span
+        type: remove
+        if: 'attributes.span_id == ""'
+        field: attributes.span_id
+      - id: inventory_kv
+        type: key_value_parser
+        if: 'attributes.message != nil and attributes.message matches "^event="'
+        parse_from: attributes.message
+        parse_to: attributes
+        on_error: send_quiet
+      - id: inventory_drop_parts
+        type: remove
+        if: 'attributes.message != nil and attributes.event != nil'
+        field: attributes.message
+        output: done
+
+      - id: done
+        type: noop
+
+exporters:
+  otlp_http/signoz:
+    endpoint: http://localhost:4318
+
+processors:
+  batch:
+    timeout: 1s
+
+service:
+  extensions: [file_storage/file_log]
+  pipelines:
+    logs:
+      receivers: [file_log/estate]
+      processors: [batch]
+      exporters: [otlp_http/signoz]

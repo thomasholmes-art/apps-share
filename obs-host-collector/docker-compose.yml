@@ -1,0 +1,22 @@
+# Host log collector for obs-sample-estate, run as its own compose project
+# (obs-host-collector) from /opt/obs-host-collector on the lab image, so it
+# keeps running when the estate is brought down. It uses the host network so
+# that `localhost:4318` is SigNoz's OTLP/HTTP receiver on the VM, and reads
+# Docker's container log files read-only.
+name: obs-host-collector
+
+services:
+  host-collector:
+    image: otel/opentelemetry-collector-contrib:0.160.0
+    container_name: obs-host-collector
+    command: ["--config=/etc/otelcol/collector.yaml"]
+    network_mode: host
+    user: "0:0"
+    restart: unless-stopped
+    volumes:
+      - ./collector.yaml:/etc/otelcol/collector.yaml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - filelog-state:/var/lib/otelcol
+
+volumes:
+  filelog-state: {}
