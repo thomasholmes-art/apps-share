@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+#
+# bin/stage NAME: put box-office-estate's source files into the state of one
+# of its rollback points. Run it from ~/labs/box-office-estate.
+#
+#   start  the application as shipped for module 07: all seven
+#          TODO(telemetry-...) markers in place, no telemetry exported.
+#   a      the state at the end of gate A: structured logs with the
+#          correlation identifier, and seatmap's trace context in its logs.
+#   b      the state at the end of gate B: gate A, plus the Node SDK and the
+#          Java agent exporting to SigNoz.
+#   c      the state at the end of gate C: gate B, plus the trace context
+#          carried across the payment queue to payments-sim.
+#
+# stages/gate-a/, stages/gate-b/ and stages/gate-c/ hold only the files that
+# the gate changes, at their paths in the application, so each one can be read
+# and compared with an edited copy. stages/start/ holds every shipped file.
+# stages/NAME.remove, where present, lists files that rollback point does not
+# have.
+#
+# Every run:
+#   - sets every shipped file to its version at NAME: the gate's copy if
+#     stages/gate-NAME/ has one, otherwise the shipped copy;
+#   - never overwrites or deletes telemetry-spec.md;
+#   - leaves files that are not part of the shipped application in place;
+#   - copies each file it replaces or removes into .stage-backup/<time>/;
+#   - writes NAME to .stage;
+#   - exits 0 with a message, changing nothing, if .stage already says NAME.
+#
+# It does not run docker. The gates change docker-compose.yml and source files
+# that are compiled into the images, so a restart does not pick them up; the
+# containers need `docker compose up -d --build`, which it prints at the end.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SPEC=telemetry-spec.md
+
+usage() {
+  echo "usage: bin/stage NAME   (NAME is one of start a b c)" >&2
+  exit 2
+}
+
+[ $# -eq 1 ] || usage
+case "$1" in
+  start|main) target=start ;;
+  a|A|gate-a) target=a ;;
+  b|B|gate-b) target=b ;;
+  c|C|gate-c) target=c ;;
+  *) usage ;;
+esac
+
+cd "$ROOT"
+if [ ! -d stages/start ] || [ ! -f docker-compose.yml ]; then
+  echo "stage: $ROOT has no stages/start/ directory; run bin/stage from ~/labs/box-office-estate" >&2
+  exit 1
+fi
+
+current="$(tr -d '[:space:]' < .stage 2>/dev/null || true)"
+current="${current:-start}"
+
+if [ "$current" = "$target" ]; then
+  echo "stage: already at stage $target; no files changed"
+  echo "stage: to put back stage $target's files after editing them, run bin/stage start, then bin/stage $target"
+  exit 0
+fi
+
+stage_dir() { if [ "$1" = start ]; then echo stages/start; else echo "stages/gate-$1"; fi; }
+dir="$(stage_dir "$target")"
+removes="$dir.remove"
+backup=""
+changed=0
+
+save() {
+  local path="$1"
+  [ -e "$path" ] || return 0
+  if [ -z "$backup" ]; then
+    local base n=1
+    base=".stage-backup/$(date -u +%Y%m%dT%H%M%SZ)-from-$current"
+    backup="$base"
+    while [ -e "$backup" ]; do n=$((n + 1)); backup="$base-$n"; done
+    mkdir -p "$backup"
+  fi
+  mkdir -p "$backup/$(dirname "$path")"
+  cp -a "$path" "$backup/$path"
+}
+
+# Copy one file from a stage directory into the application.
+place() {
+  local from="$1" path="$2"
+  if [ -f "$path" ] && cmp -s "$from" "$path"; then return 0; fi
+  save "$path"
+  mkdir -p "$(dirname "$path")"
+  cp -p "$from" "$path"
+  changed=$((changed + 1))
+}
+
+remove() {
+  local path="$1"
+  [ -e "$path" ] || return 0
+  save "$path"
+  rm -rf "$path"
+  changed=$((changed + 1))
+}
+
+listed() { [ -f "$2" ] && grep -qxF "$1" "$2"; }
+
+# Every path any rollback point touches: the shipped files, the gate files and
+# the paths the .remove lists name.
+all_paths() {
+  {
+    for d in stages/start stages/gate-a stages/gate-b stages/gate-c; do
+      [ -d "$d" ] && (cd "$d" && find . -type f | sed 's|^\./||')
+    done
+    cat stages/*.remove 2>/dev/null || true
+  } | sed '/^$/d' | sort -u
+}
+
+while IFS= read -r path; do
+  [ "$path" = "$SPEC" ] && continue
+  if [ "$target" != start ] && [ -f "$dir/$path" ]; then
+    place "$dir/$path" "$path"
+  elif listed "$path" "$removes"; then
+    remove "$path"
+  elif [ -f "stages/start/$path" ]; then
+    place "stages/start/$path" "$path"
+  else
+    remove "$path"
+  fi
+done < <(all_paths)
+
+echo "$target" > .stage
+echo "stage: applied $dir; files replaced or removed: $changed; $SPEC left as it is"
+[ -n "$backup" ] && echo "stage: replaced files saved in $backup"
+echo "stage: application is at stage $target (was $current)"
+echo "stage: the running containers still use the previous files; rebuild and restart them with:"
+echo "  docker compose up -d --build"

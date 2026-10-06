@@ -1,0 +1,19 @@
+{
+  "name": "payments-sim",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "box-office-estate payments-sim: payment authorisation, invoked as a function over a local queue. Module 07, lab 07-hackathon-two-worlds.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "start": "node src/host.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/exporter-trace-otlp-http": "0.222.0",
+    "@opentelemetry/sdk-node": "0.222.0",
+    "pino": "10.1.0"
+  }
+}

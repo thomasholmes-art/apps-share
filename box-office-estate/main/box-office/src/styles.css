@@ -1,0 +1,14 @@
+/* box-office styles. Part of box-office-estate (module 07, lab 07-hackathon-two-worlds). */
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f6f4; color: #1d1d1b; }
+.page { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+.events { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.event { display: flex; flex-direction: column; text-align: left; padding: 0.5rem 0.75rem; border: 1px solid #bbb; background: #fff; cursor: pointer; }
+.event.current { border-color: #1d4ed8; outline: 2px solid #1d4ed8; }
+.seatmap { max-height: 50vh; overflow: auto; background: #fff; border: 1px solid #ddd; padding: 0.5rem; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; margin-bottom: 2px; }
+.label { width: 3rem; font-size: 0.75rem; color: #666; }
+.seat { min-width: 1.8rem; font-size: 0.7rem; padding: 1px; border: 1px solid #9ca3af; background: #e5f3e8; cursor: pointer; }
+.seat.chosen { background: #1d4ed8; color: #fff; }
+.payment { display: grid; gap: 0.5rem; max-width: 24rem; margin-top: 1rem; }
+.payment label { display: grid; gap: 0.2rem; }
+.error h1 { color: #b91c1c; }

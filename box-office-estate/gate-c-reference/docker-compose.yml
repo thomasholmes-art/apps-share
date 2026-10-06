@@ -1,0 +1,108 @@
+# box-office-estate: the ticketing application for module 07,
+# lab 07-hackathon-two-worlds.
+#
+# Four processes (box-office, orders-api, seatmap, payments-sim) and Postgres,
+# plus a collector that carries telemetry to SigNoz and a customers container
+# that browses the box office in the background.
+name: box-office-estate
+
+x-shipped-logs: &shipped-logs
+  # Each service's standard output goes to the collector's Fluent Forward
+  # receiver as well as to `docker compose logs`. Record times keep their
+  # milliseconds only with sub-second precision switched on.
+  driver: fluentd
+  options:
+    fluentd-address: "127.0.0.1:24224"
+    fluentd-async: "true"
+    fluentd-sub-second-precision: "true"
+    tag: "{{.Name}}"
+
+services:
+  postgres:
+    build: ./postgres
+    cap_add: [NET_ADMIN]
+    environment:
+      POSTGRES_DB: boxoffice
+      POSTGRES_USER: boxoffice
+      POSTGRES_PASSWORD: boxoffice
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "boxoffice", "-d", "boxoffice"]
+      interval: 5s
+      retries: 20
+
+  seatmap:
+    build: ./seatmap
+    command: java -javaagent:/opt/otel/opentelemetry-javaagent-2.31.1.jar -jar /app/seatmap.jar
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/boxoffice
+      SPRING_DATASOURCE_USERNAME: boxoffice
+      SPRING_DATASOURCE_PASSWORD: boxoffice
+      LOGGING_CONFIG: /app/config/logback-spring.xml
+      OTEL_LOGS_EXPORTER: none
+      OTEL_SERVICE_NAME: seatmap
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+    volumes:
+      - ./seatmap/src/main/resources/logback-spring.xml:/app/config/logback-spring.xml:ro
+      - /opt/otel/opentelemetry-javaagent-2.31.1.jar:/opt/otel/opentelemetry-javaagent-2.31.1.jar:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging: *shipped-logs
+
+  orders-api:
+    build:
+      context: .
+      dockerfile: orders-api/Dockerfile
+    # Node does not stop on SIGTERM when it runs as process 1. With init, a
+    # small init process is process 1 and passes the signal on.
+    init: true
+    command: node --import ./instrumentation.mjs dist/server.js
+    environment:
+      PORT: "4000"
+      SEATMAP_URL: http://seatmap:8080
+      PAYMENTS_QUEUE: payments-sim:7070
+      SERVICE_NAME: orders-api
+      OTEL_LOGS_EXPORTER: none
+      OTEL_SERVICE_NAME: orders-api
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4000/healthz"]
+      interval: 5s
+    depends_on: [seatmap, payments-sim]
+    logging: *shipped-logs
+
+  payments-sim:
+    build:
+      context: .
+      dockerfile: payments-sim/Dockerfile
+    init: true
+    command: node src/host.js
+    environment:
+      SERVICE_NAME: payments-sim
+    logging: *shipped-logs
+
+  box-office:
+    build: ./box-office
+    ports: ["5180:80"]
+    depends_on: [orders-api]
+
+  customers:
+    build: ./customers
+    init: true
+    depends_on: [box-office]
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.160.0
+    command: ["--config=/etc/otel/collector.yaml"]
+    volumes:
+      - ./otel-collector/collector.yaml:/etc/otel/collector.yaml:ro
+    ports:
+      - "127.0.0.1:24224:24224"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  pgdata: {}

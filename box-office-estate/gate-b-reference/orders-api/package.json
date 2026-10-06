@@ -1,0 +1,32 @@
+{
+  "name": "orders-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "box-office-estate orders-api: creates orders, holds seats through seatmap, authorises payment through payments-sim. Module 07, lab 07-hackathon-two-worlds.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "0.80.0",
+    "@opentelemetry/core": "2.11.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "0.222.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.222.0",
+    "@opentelemetry/sdk-metrics": "2.11.0",
+    "@opentelemetry/sdk-node": "0.222.0",
+    "express": "5.1.0",
+    "morgan": "1.10.1",
+    "pino": "10.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/morgan": "1.9.10",
+    "@types/node": "22.20.4",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,14 @@
+# Build context exclusions for the images built from the repository root
+# (orders-api and payments-sim). Part of box-office-estate.
+**/node_modules
+**/dist
+seatmap
+box-office
+postgres
+telemetry-export.json
+.git
+# Rollback points and the files bin/stage replaced; not used by any image.
+bin
+stages
+.stage
+.stage-backup

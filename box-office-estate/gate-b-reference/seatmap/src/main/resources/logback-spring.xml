@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  seatmap logging configuration. Part of box-office-estate, the application
+  behind module 07, lab 07-hackathon-two-worlds.
+
+  docker-compose.yml mounts this file into the container read-only and points
+  LOGGING_CONFIG at it, so an edit here takes effect on the next
+  `docker compose restart seatmap` without rebuilding the jar.
+-->
+<configuration>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <!-- trace_id and span_id are put in the MDC by the OpenTelemetry agent's logback-mdc instrumentation. -->
+      <pattern>%d{HH:mm:ss.SSS} %-5level [%X{trace_id} %X{span_id}] %logger{20} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>

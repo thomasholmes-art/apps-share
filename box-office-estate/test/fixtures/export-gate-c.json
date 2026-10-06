@@ -1,0 +1,498 @@
+{
+  "capturedAt": "2026-10-02T18:20:20.025Z",
+  "branch": "gate-c-reference",
+  "purchase": {
+    "correlationId": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+    "traceIds": [
+      "f29c61696f99898c4425c1b2a7fbc918"
+    ]
+  },
+  "logRecords": [
+    {
+      "time": "2026-10-02T18:20:04.450Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "2419df0f38321dcae348c9fea45ec32a",
+      "span_id": "1ae7797cd0264574",
+      "body": "availability returned event=842 free=4056"
+    },
+    {
+      "time": "2026-10-02T18:20:04.457Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.requested",
+      "trace_id": "fb2218b6f1034fab169fc639886102df",
+      "span_id": "21837da98ee0050b",
+      "body": "availability requested event=842"
+    },
+    {
+      "time": "2026-10-02T18:20:04.464Z",
+      "level": "info",
+      "service_name": "orders-api",
+      "event": "order.received",
+      "correlation_id": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "48bfa7d1e08a2292",
+      "body": "new order seats=2 event=842 currency=GBP",
+      "line": "{\"level\":\"info\",\"time\":\"2026-10-02T18:20:04.464Z\",\"service_name\":\"orders-api\",\"correlation_id\":\"f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042\",\"trace_id\":\"f29c61696f99898c4425c1b2a7fbc918\",\"span_id\":\"48bfa7d1e08a2292\",\"trace_flags\":\"01\",\"event\":\"order.received\",\"order_id\":\"ord_20261002_1102\",\"event_id\":842,\"seats\":2,\"msg\":\"new order seats=2 event=842 currency=GBP\"}"
+    },
+    {
+      "time": "2026-10-02T18:20:04.466Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "hold.requested",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "f8b7018e92be05af",
+      "body": "hold requested rows=1 event=842"
+    },
+    {
+      "time": "2026-10-02T18:20:04.483Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "hold.granted",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "f8b7018e92be05af",
+      "body": "hold granted ids=[H-91136, H-91137]"
+    },
+    {
+      "time": "2026-10-02T18:20:04.485Z",
+      "level": "info",
+      "service_name": "orders-api",
+      "event": "payment.published",
+      "correlation_id": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "48bfa7d1e08a2292",
+      "body": "seats held, publishing payment job",
+      "line": "{\"level\":\"info\",\"time\":\"2026-10-02T18:20:04.485Z\",\"service_name\":\"orders-api\",\"correlation_id\":\"f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042\",\"trace_id\":\"f29c61696f99898c4425c1b2a7fbc918\",\"span_id\":\"48bfa7d1e08a2292\",\"trace_flags\":\"01\",\"event\":\"payment.published\",\"order_id\":\"ord_20261002_1102\",\"hold_ids\":[\"H-91136\",\"H-91137\"],\"msg\":\"seats held, publishing payment job\"}"
+    },
+    {
+      "time": "2026-10-02T18:20:04.716Z",
+      "level": "info",
+      "service_name": "payments-sim",
+      "event": "payment.authorised",
+      "correlation_id": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+      "body": "authorisation completed in 190 ms, auth ref F991E",
+      "line": "{\"level\":\"info\",\"time\":\"2026-10-02T18:20:04.716Z\",\"service_name\":\"payments-sim\",\"correlation_id\":\"f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042\",\"event\":\"payment.authorised\",\"auth_ref\":\"F991E\",\"duration_ms\":190,\"msg\":\"authorisation completed in 190 ms, auth ref F991E\"}"
+    },
+    {
+      "time": "2026-10-02T18:20:04.717Z",
+      "level": "info",
+      "service_name": "orders-api",
+      "event": "payment.authorised",
+      "correlation_id": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "48bfa7d1e08a2292",
+      "body": "payment authorised auth_ref=F991E order ord_20261002_1102",
+      "line": "{\"level\":\"info\",\"time\":\"2026-10-02T18:20:04.717Z\",\"service_name\":\"orders-api\",\"correlation_id\":\"f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042\",\"trace_id\":\"f29c61696f99898c4425c1b2a7fbc918\",\"span_id\":\"48bfa7d1e08a2292\",\"trace_flags\":\"01\",\"event\":\"payment.authorised\",\"order_id\":\"ord_20261002_1102\",\"auth_ref\":\"F991E\",\"msg\":\"payment authorised auth_ref=F991E order ord_20261002_1102\"}"
+    },
+    {
+      "time": "2026-10-02T18:20:04.717Z",
+      "level": "info",
+      "service_name": "orders-api",
+      "event": "order.confirmed",
+      "correlation_id": "f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042",
+      "trace_id": "f29c61696f99898c4425c1b2a7fbc918",
+      "span_id": "48bfa7d1e08a2292",
+      "body": "order confirmed ord_20261002_1102",
+      "line": "{\"level\":\"info\",\"time\":\"2026-10-02T18:20:04.717Z\",\"service_name\":\"orders-api\",\"correlation_id\":\"f0fcb81f-1cac-4dd1-ba1f-2aa4414dd042\",\"trace_id\":\"f29c61696f99898c4425c1b2a7fbc918\",\"span_id\":\"48bfa7d1e08a2292\",\"trace_flags\":\"01\",\"event\":\"order.confirmed\",\"order_id\":\"ord_20261002_1102\",\"auth_ref\":\"F991E\",\"msg\":\"order confirmed ord_20261002_1102\"}"
+    },
+    {
+      "time": "2026-10-02T18:20:05.779Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.requested",
+      "trace_id": "c5865c4e0ed0ce9d7fe073697a7cc616",
+      "span_id": "47e347ca52c53d79",
+      "body": "availability requested event=521"
+    },
+    {
+      "time": "2026-10-02T18:20:05.822Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "c5865c4e0ed0ce9d7fe073697a7cc616",
+      "span_id": "47e347ca52c53d79",
+      "body": "availability returned event=521 free=143"
+    },
+    {
+      "time": "2026-10-02T18:20:06.261Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "fb2218b6f1034fab169fc639886102df",
+      "span_id": "21837da98ee0050b",
+      "body": "availability returned event=842 free=4054"
+    },
+    {
+      "time": "2026-10-02T18:20:08.725Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.requested",
+      "trace_id": "cf3aa085cdbceaf3c0f94f842614ea56",
+      "span_id": "e88afa13f0e9dd54",
+      "body": "availability requested event=521"
+    },
+    {
+      "time": "2026-10-02T18:20:08.767Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "cf3aa085cdbceaf3c0f94f842614ea56",
+      "span_id": "e88afa13f0e9dd54",
+      "body": "availability returned event=521 free=143"
+    },
+    {
+      "time": "2026-10-02T18:20:11.189Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.requested",
+      "trace_id": "b9f32cd8ebbe8a047b8e345371d65dc3",
+      "span_id": "b7d2ef2a305703b8",
+      "body": "availability requested event=509"
+    },
+    {
+      "time": "2026-10-02T18:20:11.231Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "b9f32cd8ebbe8a047b8e345371d65dc3",
+      "span_id": "b7d2ef2a305703b8",
+      "body": "availability returned event=509 free=104"
+    },
+    {
+      "time": "2026-10-02T18:20:13.000Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.requested",
+      "trace_id": "cbe020db91c5e364bf2603ca30bfee3c",
+      "span_id": "3024cb5989acb851",
+      "body": "availability requested event=509"
+    },
+    {
+      "time": "2026-10-02T18:20:13.042Z",
+      "level": "INFO",
+      "service_name": "seatmap",
+      "event": "availability.returned",
+      "trace_id": "cbe020db91c5e364bf2603ca30bfee3c",
+      "span_id": "3024cb5989acb851",
+      "body": "availability returned event=509 free=104"
+    }
+  ],
+  "spans": [
+    {
+      "spanId": "1d1237965b7a4b5d",
+      "parentSpanId": null,
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "POST /orders",
+      "startMs": 0,
+      "durationMs": 255,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/orders",
+        "http.request.method": "POST",
+        "http.response.status_code": 201,
+        "server.address": "localhost"
+      }
+    },
+    {
+      "spanId": "857cb52614bb3523",
+      "parentSpanId": "1603bfac0074eeb8",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - jsonParser",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {}
+    },
+    {
+      "spanId": "d94e14af9dcd5438",
+      "parentSpanId": "d65ee86b58fd6452",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - logger",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {}
+    },
+    {
+      "spanId": "d65ee86b58fd6452",
+      "parentSpanId": "1d1237965b7a4b5d",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - patched",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/"
+      }
+    },
+    {
+      "spanId": "bea30ff4e7f13789",
+      "parentSpanId": "1d1237965b7a4b5d",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - patched",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/"
+      }
+    },
+    {
+      "spanId": "1603bfac0074eeb8",
+      "parentSpanId": "1d1237965b7a4b5d",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - patched",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/"
+      }
+    },
+    {
+      "spanId": "8a53d9a64a5d644f",
+      "parentSpanId": "bea30ff4e7f13789",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - withCorrelationId",
+      "startMs": 0,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {}
+    },
+    {
+      "spanId": "b1a98833e47d896a",
+      "parentSpanId": "48bfa7d1e08a2292",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "POST",
+      "startMs": 1,
+      "durationMs": 20,
+      "status": "UNSET",
+      "attributes": {
+        "http.request.method": "POST",
+        "http.response.status_code": 201,
+        "server.address": "seatmap"
+      }
+    },
+    {
+      "spanId": "4d84d5b8444a223a",
+      "parentSpanId": "1d1237965b7a4b5d",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - patched",
+      "startMs": 1,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/"
+      }
+    },
+    {
+      "spanId": "a02f3e0e69271f8b",
+      "parentSpanId": "1d1237965b7a4b5d",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "middleware - patched",
+      "startMs": 1,
+      "durationMs": 255,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/orders"
+      }
+    },
+    {
+      "spanId": "412b6310e179f592",
+      "parentSpanId": "a02f3e0e69271f8b",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "request handler - /orders",
+      "startMs": 1,
+      "durationMs": 255,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/orders"
+      }
+    },
+    {
+      "spanId": "48bfa7d1e08a2292",
+      "parentSpanId": "412b6310e179f592",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "request handler - /orders",
+      "startMs": 1,
+      "durationMs": 255,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/orders"
+      }
+    },
+    {
+      "spanId": "abe159440cb2c3c6",
+      "parentSpanId": "4d84d5b8444a223a",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "router - /events",
+      "startMs": 1,
+      "durationMs": 0,
+      "status": "UNSET",
+      "attributes": {}
+    },
+    {
+      "spanId": "f8b7018e92be05af",
+      "parentSpanId": "b1a98833e47d896a",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "seatmap",
+      "name": "POST /holds",
+      "startMs": 2,
+      "durationMs": 20,
+      "status": "UNSET",
+      "attributes": {
+        "http.route": "/holds",
+        "http.request.method": "POST",
+        "http.response.status_code": 201,
+        "server.address": "seatmap"
+      }
+    },
+    {
+      "spanId": "79bb086f25dc4c73",
+      "parentSpanId": "f8b7018e92be05af",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "seatmap",
+      "name": "boxoffice",
+      "startMs": 4,
+      "durationMs": 4,
+      "status": "UNSET",
+      "attributes": {
+        "server.address": "postgres",
+        "db.system": "postgresql"
+      }
+    },
+    {
+      "spanId": "9edb6c47beeabfcd",
+      "parentSpanId": "f8b7018e92be05af",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "seatmap",
+      "name": "INSERT boxoffice.seat_hold",
+      "startMs": 7,
+      "durationMs": 6,
+      "status": "UNSET",
+      "attributes": {
+        "server.address": "postgres",
+        "db.system": "postgresql",
+        "db.statement": "INSERT INTO seat_hold (hold_id, event_id, seat_id, order_ref) SELECT ? || nextval(?), ?, s.seat_id, ? FROM unnest(?::int[]) WITH ORDINALITY AS s(seat_id, ord) ORDER BY s.ord ON CONFLICT (event_id, seat_id) WHERE released_at IS NULL DO NOTHING RETURNING hold_id, seat_id"
+      }
+    },
+    {
+      "spanId": "45fb6a20b9627231",
+      "parentSpanId": "48bfa7d1e08a2292",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "orders-api",
+      "name": "payments.authorize",
+      "startMs": 22,
+      "durationMs": 232,
+      "status": "UNSET",
+      "attributes": {
+        "messaging.system": "local-queue",
+        "messaging.operation": "publish",
+        "client.timeout_ms": 2000
+      }
+    },
+    {
+      "spanId": "009bfebbb04c6ded",
+      "parentSpanId": "45fb6a20b9627231",
+      "traceId": "f29c61696f99898c4425c1b2a7fbc918",
+      "serviceName": "payments-sim",
+      "name": "payments.handle",
+      "startMs": 63,
+      "durationMs": 190,
+      "status": "UNSET",
+      "attributes": {
+        "messaging.operation": "process",
+        "faas.coldstart": false,
+        "queue.wait_ms": 41,
+        "idle.timeout_s": 90
+      }
+    }
+  ],
+  "dashboard": {
+    "name": "box-office purchase journey",
+    "panels": [
+      {
+        "title": "Error rate by route",
+        "metric": "signoz_error_ratio",
+        "aggregation": "ratio",
+        "groupBy": [
+          "operation"
+        ],
+        "filters": [
+          {
+            "key": "service.name",
+            "value": "orders-api"
+          },
+          {
+            "key": "kind_string",
+            "value": "Server"
+          },
+          {
+            "key": "service.name",
+            "value": "orders-api"
+          },
+          {
+            "key": "kind_string",
+            "value": "Server"
+          },
+          {
+            "key": "has_error",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "title": "Throughput by route",
+        "metric": "calls",
+        "aggregation": "rate",
+        "groupBy": [
+          "operation"
+        ],
+        "filters": [
+          {
+            "key": "service.name",
+            "value": "orders-api"
+          },
+          {
+            "key": "kind_string",
+            "value": "Server"
+          }
+        ]
+      },
+      {
+        "title": "p95 latency by route, split by outcome",
+        "metric": "durationNano",
+        "aggregation": "p95",
+        "groupBy": [
+          "operation",
+          "has_error"
+        ],
+        "filters": [
+          {
+            "key": "service.name",
+            "value": "orders-api"
+          },
+          {
+            "key": "kind_string",
+            "value": "Server"
+          }
+        ]
+      }
+    ]
+  }
+}

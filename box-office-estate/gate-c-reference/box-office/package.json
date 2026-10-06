@@ -1,0 +1,18 @@
+{
+  "name": "box-office",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "box-office-estate front end: seat picker and payment form. Module 07, lab 07-hackathon-two-worlds.",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.7.0",
+    "vite": "6.4.3"
+  }
+}

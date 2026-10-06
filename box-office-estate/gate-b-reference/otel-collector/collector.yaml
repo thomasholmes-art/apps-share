@@ -1,0 +1,76 @@
+# Collector for box-office-estate. Part of the application behind module 07,
+# lab 07-hackathon-two-worlds. Lab 03's collector with a logs pipeline added.
+#
+# Two inputs:
+#   - OTLP on 4317 (gRPC) and 4318 (HTTP), for spans and metrics from the
+#     services once telemetry is attached to them;
+#   - Fluent Forward on 24224, where Docker's fluentd log driver delivers each
+#     service's standard output, one record per line.
+# Everything goes to the SigNoz instance already running on the lab VM.
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  fluentforward:
+    endpoint: 0.0.0.0:24224
+
+processors:
+  # memory_limiter runs first so the collector protects itself before any
+  # other processor spends memory. Processor order is execution order.
+  memory_limiter:
+    check_interval: 5s
+    limit_mib: 256
+    spike_limit_mib: 64
+
+  # Container log lines. The raw line stays as the body. A line that is a
+  # JSON object also has its keys copied into attributes, so level,
+  # service_name, event, correlation_id, trace_id and span_id can be filtered
+  # by name. A line with no service_name of its own gets the compose service
+  # name, taken from the log driver's tag (<project>-<service>-<n>).
+  transform/container-logs:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - merge_maps(attributes, ParseJSON(body), "upsert") where IsString(body) and IsMatch(body, "^\\s*\\{")
+          - set(attributes["compose.service"], attributes["fluent.tag"]) where attributes["fluent.tag"] != nil
+          - replace_pattern(attributes["compose.service"], "^/?box-office-estate[-_](.+?)[-_][0-9]+$", "$$1")
+          - set(attributes["service_name"], attributes["compose.service"]) where attributes["service_name"] == nil and attributes["compose.service"] != nil
+          - set(attributes["service.name"], attributes["service_name"]) where attributes["service_name"] != nil
+          - set(severity_text, ToUpperCase(attributes["level"])) where IsString(attributes["level"])
+          - set(trace_id.string, attributes["trace_id"]) where IsString(attributes["trace_id"]) and IsMatch(attributes["trace_id"], "^[0-9a-f]{32}$")
+          - set(span_id.string, attributes["span_id"]) where IsString(attributes["span_id"]) and IsMatch(attributes["span_id"], "^[0-9a-f]{16}$")
+
+  # Moves service.name from each record to its resource, which is where
+  # SigNoz reads the service from, grouping records by service on the way.
+  groupbyattrs/service:
+    keys: [service.name]
+
+  batch:
+    timeout: 5s
+
+exporters:
+  otlp/signoz:
+    # host.docker.internal resolves to the lab VM from inside this container,
+    # via the extra_hosts entry in docker-compose.yml.
+    endpoint: host.docker.internal:4317
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/signoz]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/signoz]
+    logs:
+      receivers: [otlp, fluentforward]
+      processors: [memory_limiter, transform/container-logs, groupbyattrs/service, batch]
+      exporters: [otlp/signoz]

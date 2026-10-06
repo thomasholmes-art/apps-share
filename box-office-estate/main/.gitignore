@@ -1,0 +1,5 @@
+# Written by ./verify.sh on every run.
+telemetry-export.json
+node_modules/
+dist/
+seatmap/target/
