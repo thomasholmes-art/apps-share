@@ -1,0 +1,101 @@
+# obs-sample-estate: the teaching application for ObsTooling modules and
+# labs 01 to 06. Labs never edit this file. Lab 03 adds
+# docker-compose.override.yml (the otel-sidecar and the telemetry start
+# commands) and lab 05 adds docker-compose.dispatch.yml (worker telemetry and
+# label-api); both are merged over this one.
+#
+# Four services, each with a fixed container name and image name so that
+# `docker compose ps` prints the four rows lab 01 shows. No service declares a
+# health check, so the rows read `Up` with no `(healthy)`. Only storefront
+# (5173) and checkout-api (3000) publish ports.
+#
+# Every service logs to Docker's json-file driver with the compose project and
+# service labels attached, which is how the host log collector
+# (/opt/obs-host-collector) selects this estate's containers and names them.
+name: obs-sample-estate
+
+x-logging: &logging
+  driver: json-file
+  options:
+    labels: "com.docker.compose.project,com.docker.compose.service"
+
+services:
+  storefront:
+    build: ./storefront
+    image: obs-storefront
+    container_name: storefront
+    init: true
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      CHECKOUT_API_URL: http://checkout-api:3000
+    depends_on:
+      - checkout-api
+    logging: *logging
+
+  checkout-api:
+    build: ./checkout-api
+    image: obs-checkout-api
+    container_name: checkout-api
+    init: true
+    restart: unless-stopped
+    working_dir: /app
+    command: node src/server.js
+    ports:
+      - "3000:3000"
+    volumes:
+      # The whole host directory is the container's /app, so an edit on the
+      # host plus `docker compose restart checkout-api` is what runs.
+      - ./checkout-api:/app
+      - dispatch-spool:/var/spool/dispatch
+    environment:
+      APP_ENV: lab
+      BUILD_ID: local
+      LOG_LEVEL: debug
+      INVENTORY_URL: http://inventory:3001/reserve
+      DISPATCH_SPOOL_DIR: /var/spool/dispatch
+      # Used from lab 03 on, when the override loads the Node SDK. Express and
+      # http stay instrumented; file, socket and DNS spans are left out.
+      OTEL_NODE_DISABLED_INSTRUMENTATIONS: fs,net,dns
+    depends_on:
+      - inventory
+      - dispatch-worker
+    logging: *logging
+
+  inventory:
+    build: ./inventory
+    image: obs-inventory
+    container_name: inventory
+    init: true
+    restart: unless-stopped
+    working_dir: /app
+    command: java -jar /app/inventory.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: lab
+      # Used from lab 03 on, when the override loads the Java agent. Stable
+      # database span names (`SELECT stock_line`, as lab 05's trace shows)
+      # alongside the older attributes such as db.statement.
+      OTEL_SEMCONV_STABILITY_OPT_IN: database/dup
+    logging: *logging
+
+  dispatch-worker:
+    build: ./dispatch-worker
+    image: obs-dispatch-worker
+    container_name: dispatch-worker
+    init: true
+    restart: unless-stopped
+    working_dir: /app
+    command: node src/worker-main.js
+    volumes:
+      - dispatch-spool:/var/spool/dispatch
+    environment:
+      LOG_LEVEL: debug
+      DISPATCH_SPOOL_DIR: /var/spool/dispatch
+      OTEL_NODE_DISABLED_INSTRUMENTATIONS: fs,net,dns
+    logging: *logging
+
+volumes:
+  # The dispatch queue: checkout-api writes one JSON file per message and
+  # dispatch-worker claims them. Kept across `docker compose down`.
+  dispatch-spool: {}

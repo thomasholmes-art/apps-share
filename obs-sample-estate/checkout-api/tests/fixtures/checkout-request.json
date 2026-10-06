@@ -1,0 +1,17 @@
+{
+  "description": "The basket from the module 01 lab: inventory holds no reservation record for TS-SHIRT-XL-BLK, so it answers 200 with two reservations for a three-line request.",
+  "inbound_correlation_id": "6a5f1c3b-9d21-4f8e-bb70-2c0a5f1e77d4",
+  "body": {
+    "customer": { "id": "cus_7f31a2" },
+    "basket": {
+      "currency": "GBP",
+      "lines": [
+        { "sku": "MUG-ENAMEL-01", "qty": 1 },
+        { "sku": "CAP-NAVY-OS", "qty": 1 },
+        { "sku": "TS-SHIRT-XL-BLK", "qty": 2 }
+      ]
+    }
+  },
+  "inventory_reserves_on_failure": ["MUG-ENAMEL-01", "CAP-NAVY-OS"],
+  "inventory_reserves_on_success": ["MUG-ENAMEL-01", "CAP-NAVY-OS", "TS-SHIRT-XL-BLK"]
+}

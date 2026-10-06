@@ -1,0 +1,586 @@
+{
+  "currency": "GBP",
+  "page_size": 12,
+  "shipping": {
+    "flat_minor": 395,
+    "free_from_minor": 3000
+  },
+  "products": [
+    {
+      "sku": "MUG-ENAMEL-01",
+      "name": "Enamel mug",
+      "category": "Kitchen",
+      "page": 1,
+      "price_minor": 1250,
+      "description": "Enamel mug. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-NAVY-OS",
+      "name": "Navy cap, one size",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 1200,
+      "description": "Navy cap, one size. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TS-SHIRT-S-BLK",
+      "name": "Black T-shirt, size S",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 1800,
+      "description": "Black T-shirt, size S. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TS-SHIRT-M-BLK",
+      "name": "Black T-shirt, size M",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 1800,
+      "description": "Black T-shirt, size M. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TS-SHIRT-L-BLK",
+      "name": "Black T-shirt, size L",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 1800,
+      "description": "Black T-shirt, size L. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TS-SHIRT-XL-BLK",
+      "name": "Black T-shirt, size XL",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 1800,
+      "description": "Black T-shirt, size XL. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-DOT",
+      "name": "A5 dot notebook",
+      "category": "Stationery",
+      "page": 1,
+      "price_minor": 1400,
+      "description": "A5 dot notebook. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-CANVAS-01",
+      "name": "Canvas tote bag",
+      "category": "Bags",
+      "page": 1,
+      "price_minor": 1500,
+      "description": "Canvas tote bag. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PEN-GEL-BLK-3",
+      "name": "Black gel pens, pack of 3",
+      "category": "Stationery",
+      "page": 1,
+      "price_minor": 650,
+      "description": "Black gel pens, pack of 3. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "STKR-PACK-12",
+      "name": "Sticker pack of 12",
+      "category": "Stationery",
+      "page": 1,
+      "price_minor": 450,
+      "description": "Sticker pack of 12. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BOTL-STEEL-500",
+      "name": "Steel bottle, 500 ml",
+      "category": "Kitchen",
+      "page": 1,
+      "price_minor": 2200,
+      "description": "Steel bottle, 500 ml. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SOCK-STRP-M",
+      "name": "Striped socks, medium",
+      "category": "Clothing",
+      "page": 1,
+      "price_minor": 900,
+      "description": "Striped socks, medium. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "MUG-ENAMEL-RED",
+      "name": "Enamel mug, red",
+      "category": "Kitchen",
+      "page": 2,
+      "price_minor": 1250,
+      "description": "Enamel mug, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-RED-OS",
+      "name": "Cap, one size, red",
+      "category": "Clothing",
+      "page": 2,
+      "price_minor": 1200,
+      "description": "Cap, one size, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-RED-LN",
+      "name": "A5 lined notebook, red",
+      "category": "Stationery",
+      "page": 2,
+      "price_minor": 1350,
+      "description": "A5 lined notebook, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "HOOD-RED-M",
+      "name": "Hoodie, size M, red",
+      "category": "Clothing",
+      "page": 2,
+      "price_minor": 3800,
+      "description": "Hoodie, size M, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-RED-CV",
+      "name": "Canvas tote bag, red",
+      "category": "Bags",
+      "page": 2,
+      "price_minor": 1500,
+      "description": "Canvas tote bag, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BEANIE-RED-OS",
+      "name": "Knitted beanie, red",
+      "category": "Clothing",
+      "page": 2,
+      "price_minor": 1600,
+      "description": "Knitted beanie, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "LANYARD-RED-STD",
+      "name": "Lanyard, red",
+      "category": "Accessories",
+      "page": 2,
+      "price_minor": 500,
+      "description": "Lanyard, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "UMBR-RED-CMP",
+      "name": "Compact umbrella, red",
+      "category": "Accessories",
+      "page": 2,
+      "price_minor": 2400,
+      "description": "Compact umbrella, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "COASTER-RED-S4",
+      "name": "Cork coaster, set of 4, red",
+      "category": "Kitchen",
+      "page": 2,
+      "price_minor": 800,
+      "description": "Cork coaster, set of 4, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "APRON-RED-STD",
+      "name": "Cotton apron, red",
+      "category": "Kitchen",
+      "page": 2,
+      "price_minor": 2100,
+      "description": "Cotton apron, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SCARF-RED-STD",
+      "name": "Wool scarf, red",
+      "category": "Clothing",
+      "page": 2,
+      "price_minor": 2600,
+      "description": "Wool scarf, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PCASE-RED-ZIP",
+      "name": "Zip pencil case, red",
+      "category": "Stationery",
+      "page": 2,
+      "price_minor": 700,
+      "description": "Zip pencil case, red. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "MUG-ENAMEL-GRN",
+      "name": "Enamel mug, green",
+      "category": "Kitchen",
+      "page": 3,
+      "price_minor": 1250,
+      "description": "Enamel mug, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-GRN-OS",
+      "name": "Cap, one size, green",
+      "category": "Clothing",
+      "page": 3,
+      "price_minor": 1200,
+      "description": "Cap, one size, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-GRN-LN",
+      "name": "A5 lined notebook, green",
+      "category": "Stationery",
+      "page": 3,
+      "price_minor": 1350,
+      "description": "A5 lined notebook, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "HOOD-GRN-M",
+      "name": "Hoodie, size M, green",
+      "category": "Clothing",
+      "page": 3,
+      "price_minor": 3800,
+      "description": "Hoodie, size M, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-GRN-CV",
+      "name": "Canvas tote bag, green",
+      "category": "Bags",
+      "page": 3,
+      "price_minor": 1500,
+      "description": "Canvas tote bag, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BEANIE-GRN-OS",
+      "name": "Knitted beanie, green",
+      "category": "Clothing",
+      "page": 3,
+      "price_minor": 1600,
+      "description": "Knitted beanie, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "LANYARD-GRN-STD",
+      "name": "Lanyard, green",
+      "category": "Accessories",
+      "page": 3,
+      "price_minor": 500,
+      "description": "Lanyard, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "UMBR-GRN-CMP",
+      "name": "Compact umbrella, green",
+      "category": "Accessories",
+      "page": 3,
+      "price_minor": 2400,
+      "description": "Compact umbrella, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "COASTER-GRN-S4",
+      "name": "Cork coaster, set of 4, green",
+      "category": "Kitchen",
+      "page": 3,
+      "price_minor": 800,
+      "description": "Cork coaster, set of 4, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "APRON-GRN-STD",
+      "name": "Cotton apron, green",
+      "category": "Kitchen",
+      "page": 3,
+      "price_minor": 2100,
+      "description": "Cotton apron, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SCARF-GRN-STD",
+      "name": "Wool scarf, green",
+      "category": "Clothing",
+      "page": 3,
+      "price_minor": 2600,
+      "description": "Wool scarf, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PCASE-GRN-ZIP",
+      "name": "Zip pencil case, green",
+      "category": "Stationery",
+      "page": 3,
+      "price_minor": 700,
+      "description": "Zip pencil case, green. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "MUG-ENAMEL-YEL",
+      "name": "Enamel mug, yellow",
+      "category": "Kitchen",
+      "page": 4,
+      "price_minor": 1250,
+      "description": "Enamel mug, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-YEL-OS",
+      "name": "Cap, one size, yellow",
+      "category": "Clothing",
+      "page": 4,
+      "price_minor": 1200,
+      "description": "Cap, one size, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-YEL-LN",
+      "name": "A5 lined notebook, yellow",
+      "category": "Stationery",
+      "page": 4,
+      "price_minor": 1350,
+      "description": "A5 lined notebook, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "HOOD-YEL-M",
+      "name": "Hoodie, size M, yellow",
+      "category": "Clothing",
+      "page": 4,
+      "price_minor": 3800,
+      "description": "Hoodie, size M, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-YEL-CV",
+      "name": "Canvas tote bag, yellow",
+      "category": "Bags",
+      "page": 4,
+      "price_minor": 1500,
+      "description": "Canvas tote bag, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BEANIE-YEL-OS",
+      "name": "Knitted beanie, yellow",
+      "category": "Clothing",
+      "page": 4,
+      "price_minor": 1600,
+      "description": "Knitted beanie, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "LANYARD-YEL-STD",
+      "name": "Lanyard, yellow",
+      "category": "Accessories",
+      "page": 4,
+      "price_minor": 500,
+      "description": "Lanyard, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "UMBR-YEL-CMP",
+      "name": "Compact umbrella, yellow",
+      "category": "Accessories",
+      "page": 4,
+      "price_minor": 2400,
+      "description": "Compact umbrella, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "COASTER-YEL-S4",
+      "name": "Cork coaster, set of 4, yellow",
+      "category": "Kitchen",
+      "page": 4,
+      "price_minor": 800,
+      "description": "Cork coaster, set of 4, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "APRON-YEL-STD",
+      "name": "Cotton apron, yellow",
+      "category": "Kitchen",
+      "page": 4,
+      "price_minor": 2100,
+      "description": "Cotton apron, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SCARF-YEL-STD",
+      "name": "Wool scarf, yellow",
+      "category": "Clothing",
+      "page": 4,
+      "price_minor": 2600,
+      "description": "Wool scarf, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PCASE-YEL-ZIP",
+      "name": "Zip pencil case, yellow",
+      "category": "Stationery",
+      "page": 4,
+      "price_minor": 700,
+      "description": "Zip pencil case, yellow. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "MUG-ENAMEL-GRY",
+      "name": "Enamel mug, grey",
+      "category": "Kitchen",
+      "page": 5,
+      "price_minor": 1250,
+      "description": "Enamel mug, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-GRY-OS",
+      "name": "Cap, one size, grey",
+      "category": "Clothing",
+      "page": 5,
+      "price_minor": 1200,
+      "description": "Cap, one size, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-GRY-LN",
+      "name": "A5 lined notebook, grey",
+      "category": "Stationery",
+      "page": 5,
+      "price_minor": 1350,
+      "description": "A5 lined notebook, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "HOOD-GRY-M",
+      "name": "Hoodie, size M, grey",
+      "category": "Clothing",
+      "page": 5,
+      "price_minor": 3800,
+      "description": "Hoodie, size M, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-GRY-CV",
+      "name": "Canvas tote bag, grey",
+      "category": "Bags",
+      "page": 5,
+      "price_minor": 1500,
+      "description": "Canvas tote bag, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BEANIE-GRY-OS",
+      "name": "Knitted beanie, grey",
+      "category": "Clothing",
+      "page": 5,
+      "price_minor": 1600,
+      "description": "Knitted beanie, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "LANYARD-GRY-STD",
+      "name": "Lanyard, grey",
+      "category": "Accessories",
+      "page": 5,
+      "price_minor": 500,
+      "description": "Lanyard, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "UMBR-GRY-CMP",
+      "name": "Compact umbrella, grey",
+      "category": "Accessories",
+      "page": 5,
+      "price_minor": 2400,
+      "description": "Compact umbrella, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "COASTER-GRY-S4",
+      "name": "Cork coaster, set of 4, grey",
+      "category": "Kitchen",
+      "page": 5,
+      "price_minor": 800,
+      "description": "Cork coaster, set of 4, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "APRON-GRY-STD",
+      "name": "Cotton apron, grey",
+      "category": "Kitchen",
+      "page": 5,
+      "price_minor": 2100,
+      "description": "Cotton apron, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SCARF-GRY-STD",
+      "name": "Wool scarf, grey",
+      "category": "Clothing",
+      "page": 5,
+      "price_minor": 2600,
+      "description": "Wool scarf, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PCASE-GRY-ZIP",
+      "name": "Zip pencil case, grey",
+      "category": "Stationery",
+      "page": 5,
+      "price_minor": 700,
+      "description": "Zip pencil case, grey. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "MUG-ENAMEL-WHT",
+      "name": "Enamel mug, white",
+      "category": "Kitchen",
+      "page": 6,
+      "price_minor": 1250,
+      "description": "Enamel mug, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "CAP-WHT-OS",
+      "name": "Cap, one size, white",
+      "category": "Clothing",
+      "page": 6,
+      "price_minor": 1200,
+      "description": "Cap, one size, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "NOTE-A5-WHT-LN",
+      "name": "A5 lined notebook, white",
+      "category": "Stationery",
+      "page": 6,
+      "price_minor": 1350,
+      "description": "A5 lined notebook, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "HOOD-WHT-M",
+      "name": "Hoodie, size M, white",
+      "category": "Clothing",
+      "page": 6,
+      "price_minor": 3800,
+      "description": "Hoodie, size M, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "TOTE-WHT-CV",
+      "name": "Canvas tote bag, white",
+      "category": "Bags",
+      "page": 6,
+      "price_minor": 1500,
+      "description": "Canvas tote bag, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "BEANIE-WHT-OS",
+      "name": "Knitted beanie, white",
+      "category": "Clothing",
+      "page": 6,
+      "price_minor": 1600,
+      "description": "Knitted beanie, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "LANYARD-WHT-STD",
+      "name": "Lanyard, white",
+      "category": "Accessories",
+      "page": 6,
+      "price_minor": 500,
+      "description": "Lanyard, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "UMBR-WHT-CMP",
+      "name": "Compact umbrella, white",
+      "category": "Accessories",
+      "page": 6,
+      "price_minor": 2400,
+      "description": "Compact umbrella, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "COASTER-WHT-S4",
+      "name": "Cork coaster, set of 4, white",
+      "category": "Kitchen",
+      "page": 6,
+      "price_minor": 800,
+      "description": "Cork coaster, set of 4, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "APRON-WHT-STD",
+      "name": "Cotton apron, white",
+      "category": "Kitchen",
+      "page": 6,
+      "price_minor": 2100,
+      "description": "Cotton apron, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "SCARF-WHT-STD",
+      "name": "Wool scarf, white",
+      "category": "Clothing",
+      "page": 6,
+      "price_minor": 2600,
+      "description": "Wool scarf, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    },
+    {
+      "sku": "PCASE-WHT-ZIP",
+      "name": "Zip pencil case, white",
+      "category": "Stationery",
+      "page": 6,
+      "price_minor": 700,
+      "description": "Zip pencil case, white. Part of the sample shop range used on this course. Dispatched from the warehouse within one working day; tracked delivery by Royal Mail. Prices are in pence (GBP minor units). The stock level shown at checkout comes from the inventory service, not from this catalogue."
+    }
+  ]
+}

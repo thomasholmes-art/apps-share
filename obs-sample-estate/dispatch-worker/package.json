@@ -1,0 +1,20 @@
+{
+  "name": "dispatch-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "dispatch-worker for the obs-sample-estate teaching application (ObsTooling labs 01-06).",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "start": "node src/worker-main.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "0.80.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.222.0",
+    "@opentelemetry/sdk-node": "0.222.0",
+    "pino": "10.1.0"
+  }
+}

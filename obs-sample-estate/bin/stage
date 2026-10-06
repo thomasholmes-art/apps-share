@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+#
+# bin/stage NN: put obs-sample-estate's checkout-api code into the state lab NN
+# starts from.
+#
+#   01  the module 01 build, as shipped: print-style lines, no request
+#       identifiers, the TypeError, the dispatch-queue EAGAIN line.
+#   02  lab 02's starting files (structured logging, correlation middleware,
+#       the four lab 02 files as the lab ships them) and the pooled
+#       dispatch publisher with no spans. Overwrites the four lab 02 files.
+#   03  no change of its own; lab 03's files are already present at 02.
+#   04  lab 04's starter publisher: one broker connection per message, with
+#       dispatch.publish and dispatch.connect spans.
+#   05  the publisher from ~/labs/obs-lab-04/code/starter, if its six
+#       assertions pass there; otherwise stage 04's publisher stays.
+#   06  no change of its own; lab 06 changes nothing in the estate.
+#
+# Every run:
+#   - exits 0 with a message if the estate is already at NN;
+#   - copies each file it replaces or removes into .stage-backup/<time>/;
+#   - writes NN to .stage;
+#   - restarts checkout-api if it is running, and starts nothing.
+#
+# From stage 05 on it also writes COMPOSE_FILE to the project's .env, listing
+# whichever of docker-compose.yml, docker-compose.override.yml and
+# docker-compose.dispatch.yml exist, so a new shell's `docker compose` reads
+# the same files lab 05 exported. Run it again after copying
+# docker-compose.dispatch.yml in if it was not there the first time.
+#
+# Environment (for rehearsal and testing):
+#   COMPOSE    compose command, default "docker compose"
+#   LAB04_DIR  lab 04 working directory, default ~/labs/obs-lab-04/code/starter
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+COMPOSE="${COMPOSE:-docker compose}"
+LAB04_DIR="${LAB04_DIR:-$HOME/labs/obs-lab-04/code/starter}"
+PUBLISHER=checkout-api/src/dispatch-publisher.mjs
+
+usage() {
+  echo "usage: bin/stage NN   (NN is one of 01 02 03 04 05 06)" >&2
+  exit 2
+}
+
+[ $# -eq 1 ] || usage
+case "$1" in
+  1|01) target=01 ;; 2|02) target=02 ;; 3|03) target=03 ;;
+  4|04) target=04 ;; 5|05) target=05 ;; 6|06) target=06 ;;
+  *) usage ;;
+esac
+
+cd "$ROOT"
+current="$(tr -d '[:space:]' < .stage 2>/dev/null || true)"
+current="${current:-01}"
+backup=""
+
+# COMPOSE_FILE in .env: present from stage 05 on, absent before it.
+sync_env() {
+  local want=""
+  if [ "$((10#$target))" -ge 5 ] && [ -f docker-compose.dispatch.yml ]; then
+    want="docker-compose.yml"
+    [ -f docker-compose.override.yml ] && want="$want:docker-compose.override.yml"
+    want="$want:docker-compose.dispatch.yml"
+  fi
+  local kept=""
+  [ -f .env ] && kept="$(grep -v '^COMPOSE_FILE=' .env || true)"
+  if [ -n "$want" ]; then
+    printf '%s\n' "$kept" "COMPOSE_FILE=$want" | sed '/^$/d' > .env
+    echo "stage: .env sets COMPOSE_FILE=$want"
+  elif [ -f .env ] && grep -q '^COMPOSE_FILE=' .env; then
+    if [ -n "$kept" ]; then printf '%s\n' "$kept" > .env; else rm -f .env; fi
+    echo "stage: removed COMPOSE_FILE from .env"
+  fi
+}
+
+save() {
+  local path="$1"
+  [ -e "$path" ] || return 0
+  if [ -z "$backup" ]; then
+    backup=".stage-backup/$(date -u +%Y%m%dT%H%M%SZ)-from-$current"
+    mkdir -p "$backup"
+  fi
+  mkdir -p "$backup/$(dirname "$path")"
+  cp -a "$path" "$backup/$path"
+}
+
+# Copy one file from an overlay into the estate.
+place() {
+  local from="$1" path="$2"
+  if [ -f "$path" ] && cmp -s "$from" "$path"; then return 0; fi
+  save "$path"
+  mkdir -p "$(dirname "$path")"
+  cp "$from" "$path"
+}
+
+# Overlay stages/NN/ onto the estate, then remove what stages/NN.remove lists.
+apply() {
+  local n="$1" file path
+  while IFS= read -r -d '' file; do
+    path="${file#stages/$n/}"
+    place "$file" "$path"
+  done < <(find "stages/$n" -type f -print0 | sort -z)
+  if [ -f "stages/$n.remove" ]; then
+    while IFS= read -r path; do
+      [ -n "$path" ] || continue
+      if [ -e "$path" ]; then
+        save "$path"
+        rm -rf "$path"
+      fi
+    done < "stages/$n.remove"
+  fi
+  echo "stage: applied stages/$n"
+}
+
+# Stage 05: deploy the learner's lab 04 publisher if its tests pass.
+learner_publisher() {
+  local candidate="" name
+  for name in dispatch-publisher.mjs dispatch-queue.mjs; do
+    if [ -f "$LAB04_DIR/$name" ]; then candidate="$LAB04_DIR/$name"; break; fi
+  done
+  if [ -z "$candidate" ]; then
+    echo "stage: no lab 04 publisher found in $LAB04_DIR."
+    fallback
+    return 0
+  fi
+  local out pass fail
+  out="$(cd "$LAB04_DIR" && npm test 2>&1 || true)"
+  pass="$(printf '%s\n' "$out" | sed -n 's/^# pass \([0-9]*\)$/\1/p' | tail -1)"
+  fail="$(printf '%s\n' "$out" | sed -n 's/^# fail \([0-9]*\)$/\1/p' | tail -1)"
+  if [ "${pass:-0}" = 6 ] && [ "${fail:-1}" = 0 ]; then
+    place "$candidate" "$PUBLISHER"
+    echo "stage: deployed $candidate (6 of 6 assertions pass) as $PUBLISHER"
+  else
+    echo "stage: $candidate passes ${pass:-0} of 6 assertions (${fail:-?} failing)."
+    fallback
+  fi
+}
+
+fallback() {
+  echo "stage: checkout-api keeps stage 04's publisher, so successful checkouts stay near 750 ms."
+  echo "stage: labs 05 and 06 still run; read the latency figures from their captured artefacts."
+  echo "stage: after fixing lab 04's publisher, run bin/stage 05 again."
+}
+
+at_stage_04_publisher() {
+  [ -f "$PUBLISHER" ] && cmp -s "stages/04/$PUBLISHER" "$PUBLISHER"
+}
+
+if [ "$current" = "$target" ]; then
+  echo "stage: already at stage $target"
+  if [ "$((10#$target))" -ge 5 ] && at_stage_04_publisher; then
+    learner_publisher
+  fi
+  sync_env
+  exit 0
+fi
+
+cur=$((10#$current))
+tgt=$((10#$target))
+case "$target" in
+  01) apply 01 ;;
+  02) apply 02 ;;
+  03)
+    if [ "$cur" -lt 2 ]; then apply 02
+    elif [ "$cur" -ge 4 ]; then place "stages/02/$PUBLISHER" "$PUBLISHER"; echo "stage: restored stage 02's publisher"
+    fi ;;
+  04)
+    [ "$cur" -lt 2 ] && apply 02
+    apply 04 ;;
+  05|06)
+    [ "$cur" -lt 2 ] && apply 02
+    if [ "$cur" -lt 5 ]; then
+      apply 04
+      learner_publisher
+    fi ;;
+esac
+
+echo "$target" > .stage
+sync_env
+[ -n "$backup" ] && echo "stage: replaced files saved in $backup"
+echo "stage: estate is at stage $target (was $current)"
+
+# Read the list first: `grep -q` on a pipe can stop the compose command early,
+# which pipefail would report as "not running".
+running="$($COMPOSE ps --status running --services 2>/dev/null || true)"
+if printf '%s\n' "$running" | grep -qx checkout-api; then
+  echo "stage: restarting checkout-api"
+  $COMPOSE restart checkout-api
+else
+  echo "stage: checkout-api is not running; the next docker compose up -d starts it with these files"
+fi

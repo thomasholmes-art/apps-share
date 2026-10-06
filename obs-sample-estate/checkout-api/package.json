@@ -1,0 +1,28 @@
+{
+  "name": "checkout-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "checkout-api for the obs-sample-estate teaching application (ObsTooling labs 01-06).",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "0.80.0",
+    "@opentelemetry/core": "2.11.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "0.222.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.222.0",
+    "@opentelemetry/instrumentation": "0.222.0",
+    "@opentelemetry/sdk-metrics": "2.11.0",
+    "@opentelemetry/sdk-node": "0.222.0",
+    "@opentelemetry/sdk-trace-node": "2.11.0",
+    "express": "5.1.0",
+    "import-in-the-middle": "3.5.1",
+    "pino": "10.1.0"
+  }
+}

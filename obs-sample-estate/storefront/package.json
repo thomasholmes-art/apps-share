@@ -1,0 +1,23 @@
+{
+  "name": "storefront",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "storefront for the obs-sample-estate teaching application (ObsTooling labs 01-06).",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "vite": "8.3.2"
+  }
+}
